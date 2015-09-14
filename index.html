@@ -11,7 +11,7 @@ tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
 tr.cute { background-color: #ffdddd; }
 tr.cool { background-color: #ddddff; }
 tr.passion { background-color: #ffffdd; }
-#summary { font-weight: bold; padding: 0.5em; }
+#summary { font-weight: bold; background-color: #eee; padding: 0.5em; }
 
 table label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;
 	font-weight: bold; background: rgba(0, 0, 0, 0.5); color: #555;
@@ -28,7 +28,7 @@ table input:checked.master + label { background: linear-gradient(to right, #f66,
 
 <body>
 
-<h1>Clear Checker</h1>
+<h1>Cinderella Checker</h1>
 
 <table id="list">
 <tbody></tbody>
@@ -81,16 +81,18 @@ $('table').on('click', 'input', update);
 
 $('#hideLimited').click(function() {
 	$('tr.limited').toggle(!$(this).is(':checked'));
+	update();
 });
 
 function update() {
 	var total = 0;
+	var visibleMusics = $('tr:visible').length;
 	var counts = levels.map(function(dif) {
-		var count = $('input:checked').filter('.' + dif).length;
+		var count = $('tr:visible input:checked').filter('.' + dif).length;
 		total += count;
-		return dif + " " + count + '/' + musics.length;
+		return dif.toUpperCase() + " " + count + '/' + visibleMusics;
 	});
-	$('#summary').text(counts.join('; ') + '; total ' + total + '/' + musics.length * levels.length);
+	$('#summary').text(counts.join('; ') + '; TOTAL ' + total + '/' + visibleMusics * levels.length);
 	save();
 }
 
