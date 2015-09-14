@@ -1,0 +1,101 @@
+<!html>
+<head>
+<title>Clear Checker</title>
+<style>
+
+h1 { font-size: 100%; }
+table { border-collapse: collapse; }
+td, th { border: 1px solid silver; }
+tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
+tr.cute { background-color: #ffdddd; }
+tr.cool { background-color: #ddddff; }
+tr.passion { background-color: #ffffdd; }
+#summary { font-weight: bold; padding: 0.5em; }
+
+label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;
+	font-weight: bold; background: rgba(0, 0, 0, 0.5); color: #555;
+	border-radius: 3px; margin-right: 2px; }
+input[type='checkbox'] { display: none; }
+
+input:checked + label { color: white; text-shadow: 1px 1px black; }
+input:checked.debut + label { background-color: #00e; }
+input:checked.regular + label { background-color: #ba0; }
+input:checked.pro + label { background-color: #a00; }
+input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
+</style>
+</head>
+
+<body>
+
+<h1>Clear Checker</h1>
+
+<table id="list">
+<tbody></tbody>
+</table>
+<div id="summary"></div>
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+var levels = ['debut', 'regular', 'pro', 'master'];
+var musics;
+
+$.get('musics.csv')
+.then(function(text) {
+	var table = $('#list tbody');
+	musics = text.split(/\n/).map(function(line) { return line.split(','); });
+
+	var tmp = localStorage.getItem('clearData');
+	var clearData = {};
+	try {
+		if (typeof tmp == 'string' && tmp.length > 0) clearData = JSON.parse(tmp);
+	} catch (e) {
+		//
+	}
+
+	var num = 1;
+	musics.forEach(function(music) {
+		var title  = music[0];
+		var attr = music[1];
+		var limited = music[2];
+		var tr = $('<tr>').addClass(attr).appendTo(table);
+		$('<td>').text(title).appendTo(tr);
+		var cell = $('<td class="check">').appendTo(tr);
+		levels.forEach(function(dif) {
+			var id = 'c' + (num++);
+			var check = $('<input type="checkbox">').attr('id', id).addClass(dif).appendTo(cell);
+			var label = $('<label>').attr('for', id).appendTo(cell).text(dif.toUpperCase());
+			if (title in clearData) check.prop('checked', clearData[title][dif]);
+		});
+	});
+	update();
+});
+
+$('table').on('click', 'input', update);
+
+function update() {
+	var total = 0;
+	var counts = levels.map(function(dif) {
+		var count = $('input:checked').filter('.' + dif).length;
+		total += count;
+		return dif + " " + count + '/' + musics.length;
+	});
+	$('#summary').text(counts.join('; ') + '; total ' + total + '/' + musics.length * levels.length);
+	save();
+}
+
+function save() {
+	var data = {};
+	$('#list tr').each(function (tr) {
+		var title = $('td', this).eq(0).text();
+		var istop = {};
+		$('input', this).each(function (input) {
+			istop[$(this).attr('class')] = $(this).is(':checked')
+		});
+		data[title] = istop;
+	});
+	localStorage.setItem('clearData', JSON.stringify(data));
+}
+
+
+</script>
+</body>
