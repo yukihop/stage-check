@@ -34,7 +34,10 @@ table input:checked.master + label { background: linear-gradient(to right, #f66,
 <tbody></tbody>
 </table>
 <div id="summary"></div>
-<label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
+<p>
+	<label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
+	<button id="clear">初期化</button>
+</p>
 <ul>
 <li>最新のブラウザでご利用ください。</li>
 <li>すべてのデータはこれを起動している<strong>ブラウザに保存</strong>され、外部サーバには送信・蓄積されません。</li>
@@ -82,9 +85,13 @@ $.get('musics.csv')
 
 $('table').on('click', 'input', update);
 
-$('#hideLimited').click(function() {
+$('#hideLimited').on('click', function() {
 	$('tr.limited').toggle(!$(this).is(':checked'));
 	update();
+});
+
+$('#clear').on('click', function() {
+	if (confirm('クリアデータを消去します')) load({});
 });
 
 function update() {
