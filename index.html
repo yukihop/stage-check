@@ -37,9 +37,8 @@ table input:checked.master + label { background: linear-gradient(to right, #f66,
 <label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
 <ul>
 <li>最新のブラウザでご利用ください。</li>
-<li>すべてのデータはこれを起動しているブラウザに保存され、外部サーバには送信・蓄積されません。</li>
+<li>すべてのデータはこれを起動している<strong>ブラウザに保存</strong>され、外部サーバには送信・蓄積されません。</li>
 </ul>
-
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
@@ -51,6 +50,22 @@ $.get('musics.csv')
 	var table = $('#list tbody');
 	musics = text.split(/\n/).map(function(line) { return line.split(','); });
 
+	musics.forEach(function(music) {
+		var id = music[0];
+		var title  = music[1];
+		var attr = music[2];
+		var limited = !!music[3];
+		if (!title) return;
+		var tr = $('<tr>').addClass(attr).toggleClass('limited', limited).data('music-id', id).appendTo(table);
+		$('<td>').text(title).appendTo(tr);
+		var cell = $('<td class="check">').appendTo(tr);
+		levels.forEach(function(dif) {
+			var cid = 'm-' + id + '-' + dif;
+			var check = $('<input type="checkbox">').attr('id', cid).addClass(dif).appendTo(cell);
+			var label = $('<label>').attr('for', cid).appendTo(cell).text(dif.toUpperCase());
+		});
+	});
+
 	var tmp = localStorage.getItem('clearData');
 	var clearData = {};
 	try {
@@ -58,24 +73,7 @@ $.get('musics.csv')
 	} catch (e) {
 		//
 	}
-
-	var num = 1;
-	musics.forEach(function(music) {
-		var title  = music[0];
-		var attr = music[1];
-		var limited = !!music[2];
-		if (!title) return;
-		var tr = $('<tr>').addClass(attr).toggleClass('limited', limited).appendTo(table);
-		$('<td>').text(title).appendTo(tr);
-		var cell = $('<td class="check">').appendTo(tr);
-		levels.forEach(function(dif) {
-			var id = 'c' + (num++);
-			var check = $('<input type="checkbox">').attr('id', id).addClass(dif).appendTo(cell);
-			var label = $('<label>').attr('for', id).appendTo(cell).text(dif.toUpperCase());
-			if (title in clearData) check.prop('checked', clearData[title][dif]);
-		});
-	});
-	update();
+	load(clearData);
 });
 
 $('table').on('click', 'input', update);
@@ -95,17 +93,29 @@ function update() {
 	save();
 }
 
+function load(data) {
+	$('#list tr').each(function () {
+		var id = $(this).data('music-id');
+		$(':checkbox', this).each(function () {
+			var dif = $(this).attr('class');
+			$(this).prop('checked', id in data && data[id][dif]);
+		});
+	});
+	update();
+}
+
 function save() {
 	var data = {};
-	$('#list tr').each(function (tr) {
-		var title = $('td', this).eq(0).text();
-		var istop = {};
+	$('#list tr').each(function () {
+		var id = $(this).data('music-id');
+		var flags = {};
 		$('input', this).each(function (input) {
-			istop[$(this).attr('class')] = $(this).is(':checked')
+			flags[$(this).attr('class')] = $(this).is(':checked')
 		});
-		data[title] = istop;
+		data[id] = flags;
 	});
 	localStorage.setItem('clearData', JSON.stringify(data));
+	$('#url').text(url);
 }
 
 
