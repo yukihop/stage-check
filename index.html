@@ -1,8 +1,9 @@
 <!html>
 <head>
-<title>Clear Checker</title>
-<style>
+<meta charset="utf-8">
+<title>Cinderella Stage Clear Checker</title>
 
+<style>
 h1 { font-size: 100%; }
 table { border-collapse: collapse; }
 td, th { border: 1px solid silver; }
@@ -12,16 +13,16 @@ tr.cool { background-color: #ddddff; }
 tr.passion { background-color: #ffffdd; }
 #summary { font-weight: bold; padding: 0.5em; }
 
-label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;
+table label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;
 	font-weight: bold; background: rgba(0, 0, 0, 0.5); color: #555;
-	border-radius: 3px; margin-right: 2px; }
-input[type='checkbox'] { display: none; }
+	border-radius: 3px; margin-right: 2px; cursor: pointer; }
+table input[type='checkbox'] { display: none; }
 
-input:checked + label { color: white; text-shadow: 1px 1px black; }
-input:checked.debut + label { background-color: #00e; }
-input:checked.regular + label { background-color: #ba0; }
-input:checked.pro + label { background-color: #a00; }
-input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
+table input:checked + label { color: white; text-shadow: 1px 1px black; }
+table input:checked.debut + label { background-color: #00e; }
+table input:checked.regular + label { background-color: #ba0; }
+table input:checked.pro + label { background-color: #a00; }
+table input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
 </style>
 </head>
 
@@ -33,6 +34,12 @@ input:checked.master + label { background: linear-gradient(to right, #f66, #66f,
 <tbody></tbody>
 </table>
 <div id="summary"></div>
+<label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
+<ul>
+<li>最新のブラウザでご利用ください。</li>
+<li>すべてのデータはこれを起動しているブラウザに保存され、外部サーバには送信・蓄積されません。</li>
+</ul>
+
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
@@ -56,8 +63,9 @@ $.get('musics.csv')
 	musics.forEach(function(music) {
 		var title  = music[0];
 		var attr = music[1];
-		var limited = music[2];
-		var tr = $('<tr>').addClass(attr).appendTo(table);
+		var limited = !!music[2];
+		if (!title) return;
+		var tr = $('<tr>').addClass(attr).toggleClass('limited', limited).appendTo(table);
 		$('<td>').text(title).appendTo(tr);
 		var cell = $('<td class="check">').appendTo(tr);
 		levels.forEach(function(dif) {
@@ -71,6 +79,10 @@ $.get('musics.csv')
 });
 
 $('table').on('click', 'input', update);
+
+$('#hideLimited').click(function() {
+	$('tr.limited').toggle(!$(this).is(':checked'));
+});
 
 function update() {
 	var total = 0;
