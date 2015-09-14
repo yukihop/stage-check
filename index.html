@@ -49,17 +49,20 @@ var musics;
 $.get('musics.csv')
 .then(function(text) {
 	var table = $('#list tbody');
-	musics = text.split(/\n/).map(function(line) { return line.split(','); });
+	musics =
+		text.split(/\n/).map(function(line) {
+			return line.split(',').map(function(s) { return s.trim(); });
+		});
 
 	musics.forEach(function(music) {
 		var id = music[0];
 		var title  = music[1];
 		var attr = music[2];
-		var limited = !!music[3];
+		var limited = music[3] == 'true';
 		if (!title) return;
 		var tr = $('<tr>').addClass(attr).toggleClass('limited', limited).data('music-id', id).appendTo(table);
 		$('<td>').text(title).appendTo(tr);
-		var cell = $('<td class="check">').appendTo(tr);
+		var cell = $('<td>').appendTo(tr);
 		levels.forEach(function(dif) {
 			var cid = 'm-' + id + '-' + dif;
 			var check = $('<input type="checkbox">').attr('id', cid).addClass(dif).appendTo(cell);
@@ -118,7 +121,6 @@ function save() {
 		data[id] = flags;
 	});
 	localStorage.setItem('clearData', JSON.stringify(data));
-	$('#url').text(url);
 }
 
 

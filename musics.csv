@@ -1,29 +1,29 @@
-onesin,お願い！シンデレラ,all
-todoke,とどけ！アイドル,all
-star,Star!!,all
-werethefriends,We're the friends!,all
-yubae,夕映えプレゼント,all
-goin,GOIN'!!!,all
-message,メッセージ,all
-evorevo,できたてEvo! Revo! Generation!,all
-kagayaku,輝く世界の魔法,all
+onesin,お願い！シンデレラ,all,false
+todoke,とどけ！アイドル,all,false
+star,Star!!,all,false
+werethefriends,We're the friends!,all,false
+yubae,夕映えプレゼント,all,false
+goin,GOIN'!!!,all,false
+message,メッセージ,all,false
+evorevo,できたてEvo! Revo! Generation!,all,false
+kagayaku,輝く世界の魔法,all,false
 shine,Shine!!,all,true
 otome,ススメ☆オトメ ～jewel parade～,all,true
-smiling,S(mile)ING!,cute
-onedari,おねだり Shall We ～?,cute
-kazeiro,風色メロディ,cute
-happy2,Happy×2 Days,cute
-anzuno,あんずのうた,cute
-over,ØωØver!!,cute
+smiling,S(mile)ING!,cute,false
+onedari,おねだり Shall We ～?,cute,false
+kazeiro,風色メロディ,cute,false
+happy2,Happy×2 Days,cute,false
+anzuno,あんずのうた,cute,false
+over,ØωØver!!,cute,false
 otome-cute,ススメ☆オトメ ～jewel parade～ cute version,cute,true
-neversay,Never say never,cool
-twilight,Twilight Sky,cool
-tsubomi,華蕾夢ミル狂詩曲～魂ノ導～,cool
-memories,Memories,cool
-legne,-LEGNE- 仇なす剣 光の旋律,cool
+neversay,Never say never,cool,false
+twilight,Twilight Sky,cool,false
+tsubomi,華蕾夢ミル狂詩曲～魂ノ導～,cool,false
+memories,Memories,cool,false
+legne,-LEGNE- 仇なす剣 光の旋律,cool,false
 otome-cool,ススメ☆オトメ ～jewel parade～ cool version,cool,true
-mitsuboshi,ミツボシ☆☆★,passion
-dokidoki,DOKIDOKIリズム,passion
-marshmallow,ましゅまろ☆キッス,passion
-letsgo,LET’S GO HAPPY,passion
+mitsuboshi,ミツボシ☆☆★,passion,false
+dokidoki,DOKIDOKIリズム,passion,false
+marshmallow,ましゅまろ☆キッス,passion,false
+letsgo,LET’S GO HAPPY,passion,false
 otome-passion,ススメ☆オトメ ～jewel parade～ passion version,passion,true
