@@ -17,11 +17,13 @@ $.get('musics.csv')
 		if (!title) return;
 		var tr = $('<tr>').addClass(attr).addClass(type).data('music-id', id).appendTo(table);
 		$('<th>').text(title).appendTo(tr);
-		var cell = $('<td>').appendTo(tr);
+		var cell = $('<td>').addClass('checks').appendTo(tr);
 		levels.forEach(function(dif) {
 			var cid = 'm-' + id + '-' + dif;
 			var check = $('<input type="checkbox">').attr('id', cid).addClass(dif).appendTo(cell);
-			var label = $('<label>').attr('for', cid).appendTo(cell).text(dif.toUpperCase());
+			var label = $('<label>').attr('for', cid).appendTo(cell);
+			$('<span>').addClass('level-full').text(dif.toUpperCase()).appendTo(label);
+			$('<span>').addClass('level-short').text(dif.substr(0, 2).toUpperCase()).appendTo(label);
 		});
 	});
 

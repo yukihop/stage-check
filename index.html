@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 <style>
 td, th { border: 1px solid white; font-weight: normal;}
+td.checks  { width: 410px; }
 tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
 tr.cute { background-color: #ffdddd; }
 tr.cool { background-color: #ddddff; }
@@ -23,6 +24,7 @@ table label { display: inline-block; width: 100px; text-align: center; box-shado
 	font-weight: bold; background: rgba(0, 0, 0, 0.5); color: #555;
 	border-radius: 3px; margin-right: 2px; cursor: pointer;
 	-moz-user-select: none; -ms-user-select: none; -webkit-user-select: none;}
+table label .level-short { display: none; }
 table label:hover { background-color: rgba(0, 0, 0, 0.2); }
 table input[type='checkbox'] { display: none; }
 
@@ -31,12 +33,20 @@ table input:checked.debut + label { background-color: #00e; }
 table input:checked.regular + label { background-color: #ba0; }
 table input:checked.pro + label { background-color: #a00; }
 table input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
+
+@media (max-width: 700px) {
+	table label .level-short { display: inline; }
+	table label .level-full { display: none; }
+	table label { width: 50px; height: 30px; line-height: 30px; }
+	td.checks { width: 210px; }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container-fluid">
 	<h1><span class="glyphicon glyphicon-ok"></span>Cinderella Checker</h1>
 
 	<table id="list">
