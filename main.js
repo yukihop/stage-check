@@ -49,7 +49,9 @@ $('#filter').on('change', function() {
 });
 
 $('#clear').on('click', function() {
-	if (confirm('クリアデータを消去します')) load({});
+	bootbox.confirm('クリアデータを消去します', function(result) {
+		if (result) load({});
+	});
 });
 
 function update() {

@@ -59,7 +59,11 @@ table input:checked.master + label { background: linear-gradient(to right, #f66,
 				<input type="radio" name="filter" value="normal">通常曲のみ
 			</label>
 		</span>
-		<button class="btn btn-warning" id="clear">初期化</button>
+		<!--<span class="btn-group">
+			<button class="btn btn-primary" id="export">セーブ</button>
+			<button class="btn btn-primary" id="import">ロード</button>
+		</span>-->
+		<button class="btn btn-danger" id="clear">初期化</button>
 	</p>
 	<div class="panel panel-default">
 		<div class="panel-heading">注意</div>
@@ -76,6 +80,7 @@ table input:checked.master + label { background: linear-gradient(to right, #f66,
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="bootbox.min.js"></script>
 <script src="main.js"></script>
 
 </body>
