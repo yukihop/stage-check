@@ -11,4 +11,4 @@ Cinderella Stage Clear Checker
 License
 -------
 
-MIT
+CC0 Public Domain
