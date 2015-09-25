@@ -6,11 +6,17 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 <style>
-td, th { border: 1px solid white; }
+td, th { border: 1px solid white; font-weight: normal;}
 tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
 tr.cute { background-color: #ffdddd; }
 tr.cool { background-color: #ddddff; }
 tr.passion { background-color: #ffffdd; }
+
+tr.event th::after, tr.limited th::after {
+	font-family: 'Glyphicons Halflings'; margin-left: 3px; color: gray; }
+tr.event th::after { content: '\e023'; }
+tr.limited th::after { content: '\e063'; }
+
 #summary { font-weight: bold; }
 
 table label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;

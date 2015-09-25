@@ -16,7 +16,7 @@ $.get('musics.csv')
 		var type = music[3];
 		if (!title) return;
 		var tr = $('<tr>').addClass(attr).addClass(type).data('music-id', id).appendTo(table);
-		$('<td>').text(title).appendTo(tr);
+		$('<th>').text(title).appendTo(tr);
 		var cell = $('<td>').appendTo(tr);
 		levels.forEach(function(dif) {
 			var cid = 'm-' + id + '-' + dif;
