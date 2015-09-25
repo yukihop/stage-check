@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cinderella Stage Clear Checker</title>
 
 <style>
@@ -11,7 +12,7 @@ tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
 tr.cute { background-color: #ffdddd; }
 tr.cool { background-color: #ddddff; }
 tr.passion { background-color: #ffffdd; }
-#summary { font-weight: bold; background-color: #eee; padding: 0.5em; }
+#summary { font-weight: bold; }
 
 table label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;
 	font-weight: bold; background: rgba(0, 0, 0, 0.5); color: #555;
@@ -23,30 +24,38 @@ table input:checked.debut + label { background-color: #00e; }
 table input:checked.regular + label { background-color: #ba0; }
 table input:checked.pro + label { background-color: #a00; }
 table input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
-
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 </head>
 
 <body>
 
-<h1>Cinderella Checker</h1>
+<div class="container">
+	<h1>Cinderella Checker</h1>
 
-<table id="list">
-<tbody></tbody>
-</table>
-<div id="summary"></div>
-<p>
-	<label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
-	<button id="clear">初期化</button>
-</p>
-<ul>
-<li>最新のブラウザでご利用ください。</li>
-<li>すべてのデータはこれを起動している<strong>ブラウザに保存</strong>されます。外部サーバには送信・蓄積されません。</li>
-<li>常に最新の曲リストを反映するとは限りません。</li>
-<li>コードに興味がある人は<a href="https://github.com/yukihop/stage-check">こちら</a></li>
-</ul>
+	<table id="list">
+	<tbody></tbody>
+	</table>
+	<div class="panel panel-default" id="summary"></div>
+	<p>
+		<label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
+		<button class="btn btn-warning" id="clear">初期化</button>
+	</p>
+	<div class="panel panel-default">
+		<div class="panel-heading">注意</div>
+		<div class="panel-body">
+			<ul>
+				<li>最新のブラウザでご利用ください。古いIEなどでは一切動作確認していません。</li>
+				<li>すべてのデータはこれを起動している<strong>ブラウザに保存</strong>されます。外部サーバには送信・蓄積されません。</li>
+				<li>常に最新の曲リストを反映するとは限りません。</li>
+				<li>コードに興味がある人は<a href="https://github.com/yukihop/stage-check">こちら</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="main.js"></script>
 
 </body>
