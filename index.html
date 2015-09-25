@@ -30,14 +30,25 @@ table input:checked.master + label { background: linear-gradient(to right, #f66,
 <body>
 
 <div class="container">
-	<h1>Cinderella Checker</h1>
+	<h1><span class="glyphicon glyphicon-ok"></span>Cinderella Checker</h1>
 
 	<table id="list">
 	<tbody></tbody>
 	</table>
 	<div class="panel panel-default" id="summary"></div>
 	<p>
-		<label><input type="checkbox" id="hideLimited">限定曲を隠す</label>
+		<span class="glyphicon glyphicon-filter"></span>表示
+		<span id="filter" class="btn-group" data-toggle="buttons">
+			<label class="btn btn-default active">
+				<input type="radio" checked="checked" name="filter" value="normal+event+limited">全て
+			</label>
+			<label class="btn btn-default">
+				<input type="radio" name="filter" value="normal+event">通常+イベント
+			</label>
+			<label class="btn btn-default">
+				<input type="radio" name="filter" value="normal">通常曲のみ
+			</label>
+		</span>
 		<button class="btn btn-warning" id="clear">初期化</button>
 	</p>
 	<div class="panel panel-default">

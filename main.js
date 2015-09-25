@@ -13,9 +13,9 @@ $.get('musics.csv')
 		var id = music[0];
 		var title  = music[1];
 		var attr = music[2];
-		var limited = music[3] == 'true';
+		var type = music[3];
 		if (!title) return;
-		var tr = $('<tr>').addClass(attr).toggleClass('limited', limited).data('music-id', id).appendTo(table);
+		var tr = $('<tr>').addClass(attr).addClass(type).data('music-id', id).appendTo(table);
 		$('<td>').text(title).appendTo(tr);
 		var cell = $('<td>').appendTo(tr);
 		levels.forEach(function(dif) {
@@ -37,8 +37,14 @@ $.get('musics.csv')
 
 $('table').on('click', 'input', update);
 
-$('#hideLimited').on('click', function() {
-	$('tr.limited').toggle(!$(this).is(':checked'));
+$('#filter').on('change', function() {
+	var visibles = $('#filter input:checked').val().split('+');
+	console.log(visibles);
+	$('tr').each(function() {
+		var row = $(this);
+		var flag = visibles.some(function(c) { return row.hasClass(c); });
+		$(this).toggle(flag);
+	});
 	update();
 });
 
