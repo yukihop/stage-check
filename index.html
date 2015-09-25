@@ -4,10 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cinderella Stage Clear Checker</title>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 <style>
-h1 { font-size: 100%; }
-table { border-collapse: collapse; }
-td, th { border: 1px solid silver; }
+td, th { border: 1px solid white; }
 tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
 tr.cute { background-color: #ffdddd; }
 tr.cool { background-color: #ddddff; }
@@ -17,6 +16,7 @@ tr.passion { background-color: #ffffdd; }
 table label { display: inline-block; width: 100px; text-align: center; box-shadow: 1px 1px gray;
 	font-weight: bold; background: rgba(0, 0, 0, 0.5); color: #555;
 	border-radius: 3px; margin-right: 2px; cursor: pointer; }
+table label:hover { background-color: rgba(0, 0, 0, 0.2); }
 table input[type='checkbox'] { display: none; }
 
 table input:checked + label { color: white; text-shadow: 1px 1px black; }
@@ -25,7 +25,6 @@ table input:checked.regular + label { background-color: #ba0; }
 table input:checked.pro + label { background-color: #a00; }
 table input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 </head>
 
 <body>
