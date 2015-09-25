@@ -56,6 +56,35 @@ $('#clear').on('click', function() {
 	});
 });
 
+$('#export').on('click', function() {
+	var text = btoa(JSON.stringify(makeSaveData()));
+	bootbox.dialog({
+		title: 'この文字列をコピーしてどこかに保存すれば、データをバックアップしたり、他のブラウザに転送したりできます。',
+		message: $('<textarea class="inout">').val(text).click(function() { this.select(); }),
+		buttons: { OK: { label: 'OK'}},
+		callback: $.noop
+	});
+});
+
+$('#import').on('click', function() {
+	bootbox.prompt({
+		title: '以前にエクスポートした文字列データからチェック情報を復元します（現在表示されているデータは消えてしまいます）。',
+		callback: function(result) {
+			if (result === null) return;
+			try {
+				var data = JSON.parse(atob(result));
+				load(data);
+			} catch (e) {
+				bootbox.alert('入力されたデータが不正です');
+			}
+		}
+	});
+});
+
+
+
+bootbox.setDefaults({ locale: 'ja', animate: false });
+
 function update() {
 	var total = 0;
 	var visibleMusics = $('tr:visible').length;
@@ -79,7 +108,7 @@ function load(data) {
 	update();
 }
 
-function save() {
+function makeSaveData() {
 	var data = {};
 	$('#list tr').each(function () {
 		var id = $(this).data('music-id');
@@ -89,5 +118,10 @@ function save() {
 		});
 		data[id] = flags;
 	});
+	return data;
+}
+
+function save() {
+	var data = makeSaveData();
 	localStorage.setItem('clearData', JSON.stringify(data));
 }
