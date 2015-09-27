@@ -5,7 +5,7 @@ $.get('musics.csv')
 .then(function(text) {
 	var table = $('#list tbody');
 	musics =
-		text.split(/\n/).map(function(line) {
+		text.split(/\n/).slice(1).map(function(line) {
 			return line.split(',').map(function(s) { return s.trim(); });
 		});
 
