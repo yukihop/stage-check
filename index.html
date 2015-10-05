@@ -13,9 +13,11 @@ tr.cute { background-color: #ffdddd; }
 tr.cool { background-color: #ddddff; }
 tr.passion { background-color: #ffffdd; }
 
-tr.event th::after, tr.limited th::after {
+th::after {
 	font-family: 'Glyphicons Halflings'; margin-left: 3px; color: gray; }
 tr.event th::after { content: '\e023'; }
+tr.oldevent th { color: silver; }
+tr.oldevent th::after { content: '\e090'; }
 tr.limited th::after { content: '\e063'; }
 
 #summary { font-weight: bold; }
@@ -49,36 +51,36 @@ textarea.inout { width: 100%; }
 <body>
 
 <div class="container-fluid">
-	<h1><span class="glyphicon glyphicon-ok"></span>Cinderella Checker</h1>
+	<h1><span class="glyphicon glyphicon-ok"></span> Cinderella Checker</h1>
 
+	<p>
+		<span class="glyphicon glyphicon-filter"></span> 表示
+		<span id="filter" class="btn-group" data-toggle="buttons">
+			<label class="btn btn-default active">
+				<input type="checkbox" checked name="filter" value="normal">通常
+			</label>
+			<label class="btn btn-default active">
+				<input type="checkbox" checked name="filter" value="limited">限定<span class="glyphicon glyphicon-adjust"></span>
+			</label>
+			<label class="btn btn-default active">
+				<input type="checkbox" checked name="filter" value="event">イベント<span class="glyphicon glyphicon-time"></span>
+			</label>
+			<label class="btn btn-default active">
+				<input type="checkbox" checked name="filter" value="oldevent">過去イベント<span class="glyphicon glyphicon-ban-circle"></span>
+			</label>
+		</span>
+	</p>
 	<table id="list">
 	<tbody></tbody>
 	</table>
 	<div class="panel panel-default" id="summary"></div>
 	<p>
-		<span class="glyphicon glyphicon-filter"></span>表示
-		<span id="filter" class="btn-group" data-toggle="buttons">
-			<label class="btn btn-default active">
-				<input type="radio" checked="checked" name="filter" value="normal+event+limited">全て
-			</label>
-			<label class="btn btn-default">
-				<input type="radio" name="filter" value="normal+limited">通常+限定<span class="glyphicon glyphicon-adjust"></span>
-			</label>
-			<label class="btn btn-default">
-				<input type="radio" name="filter" value="normal+event">通常+イベント<span class="glyphicon glyphicon-time"></span>
-			</label>
-			<label class="btn btn-default">
-				<input type="radio" name="filter" value="normal">通常曲のみ
-			</label>
-		</span>
-	</p>
-	<p>
-		<span class="glyphicon glyphicon-wrench"></span>ツール
+		<span class="glyphicon glyphicon-wrench"></span> ツール
 		<span class="btn-group">
 			<button class="btn btn-primary" id="export">エクスポート</button>
 			<button class="btn btn-primary" id="import">インポート</button>
 		</span>
-		<button class="btn btn-danger" id="clear"><span class="glyphicon glyphicon-alert"></span>初期化</button>
+		<button class="btn btn-danger" id="clear"><span class="glyphicon glyphicon-alert"></span> 初期化</button>
 	</p>
 	<div class="panel panel-default">
 		<div class="panel-heading">説明</div>

@@ -26,6 +26,7 @@ $.get('musics.csv')
 			$('<span>').addClass('level-short').text(dif.substr(0, 2).toUpperCase()).appendTo(label);
 		});
 	});
+	applyFilter();
 
 	var tmp = localStorage.getItem('clearData');
 	var clearData = {};
@@ -39,16 +40,16 @@ $.get('musics.csv')
 
 $('table').on('click', 'input', update);
 
-$('#filter').on('change', function() {
-	var visibles = $('#filter input:checked').val().split('+');
-	console.log(visibles);
+$('#filter').on('change', () => { applyFilter(); update(); });
+
+function applyFilter() {
+	var visibles = $('#filter input:checked').get().map(function(b) { return $(b).val(); });
 	$('tr').each(function() {
 		var row = $(this);
 		var flag = visibles.some(function(c) { return row.hasClass(c); });
 		$(this).toggle(flag);
 	});
-	update();
-});
+}
 
 $('#clear').on('click', function() {
 	bootbox.confirm('クリアデータを消去します', function(result) {
@@ -80,8 +81,6 @@ $('#import').on('click', function() {
 		}
 	});
 });
-
-
 
 bootbox.setDefaults({ locale: 'ja', animate: false });
 
