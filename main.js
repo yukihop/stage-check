@@ -12,10 +12,10 @@ $.get('musics.csv')
 	musics.forEach(function(music) {
 		var id = music[0];
 		var title  = music[1];
-		var attr = music[2];
-		var type = music[3];
+		var type = music[2];
+		var category = music[3];
 		if (!title) return;
-		var tr = $('<tr>').addClass(attr).addClass(type).data('music-id', id).appendTo(table);
+		var tr = $('<tr>').addClass(type).addClass(category).data('music-id', id).appendTo(table);
 		$('<th>').text(title).appendTo(tr);
 		var cell = $('<td>').addClass('checks').appendTo(tr);
 		levels.forEach(function(dif) {
