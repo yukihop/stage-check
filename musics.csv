@@ -1,4 +1,4 @@
-id,title,attr,type
+id,title,type,category
 onesin,お願い！シンデレラ,all,normal
 todoke,とどけ！アイドル,all,normal
 star,Star!!,all,normal
@@ -16,6 +16,7 @@ kazeiro,風色メロディ,cute,normal
 happy2,Happy×2 Days,cute,normal
 anzuno,あんずのうた,cute,normal
 over,ØωØver!!,cute,normal
+chocolat,ショコラ・ティアラ,cute,normal
 otome-cute,ススメ☆オトメ ～jewel parade～ cute version,cute,limited
 ponkotsu,アタシポンコツアンドロイド,cute,oldevent
 neversay,Never say never,cool,normal
