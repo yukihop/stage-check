@@ -1,35 +1,36 @@
-id,title,type,category
-onesin,お願い！シンデレラ,all,normal
-todoke,とどけ！アイドル,all,normal
-star,Star!!,all,normal
-werethefriends,We're the friends!,all,normal
-yubae,夕映えプレゼント,all,normal
-goin,GOIN'!!!,all,normal
-message,メッセージ,all,normal
-evorevo,できたてEvo! Revo! Generation!,all,normal
-kagayaku,輝く世界の魔法,all,normal
-shine,Shine!!,all,normal
-otome,ススメ☆オトメ ～jewel parade～,all,limited
-smiling,S(mile)ING!,cute,normal
-onedari,おねだり Shall We ～?,cute,normal
-kazeiro,風色メロディ,cute,normal
-happy2,Happy×2 Days,cute,normal
-anzuno,あんずのうた,cute,normal
-over,ØωØver!!,cute,normal
-chocolat,ショコラ・ティアラ,cute,normal
-otome-cute,ススメ☆オトメ ～jewel parade～ cute version,cute,limited
-ponkotsu,アタシポンコツアンドロイド,cute,limited
-neversay,Never say never,cool,normal
-twilight,Twilight Sky,cool,normal
-tsubomi,華蕾夢ミル狂詩曲～魂ノ導～,cool,normal
-memories,Memories,cool,normal
-legne,-LEGNE- 仇なす剣 光の旋律,cool,normal
-venus,ヴィーナスシンドローム,cool,normal
-otome-cool,ススメ☆オトメ ～jewel parade～ cool version,cool,limited
-trancing,Trancing Pulse,cool,limited
-nation,Nation Blue,cool,oldevent
-mitsuboshi,ミツボシ☆☆★,passion,normal
-dokidoki,DOKIDOKIリズム,passion,normal
-marshmallow,ましゅまろ☆キッス,passion,normal
-letsgo,LET’S GO HAPPY,passion,normal
-otome-passion,ススメ☆オトメ ～jewel parade～ passion version,passion,limited
+id,title,type,category,masplus
+onesin,お願い！シンデレラ,all,normal,false
+todoke,とどけ！アイドル,all,normal,false
+star,Star!!,all,normal,false
+werethefriends,We're the friends!,all,normal,false
+yubae,夕映えプレゼント,all,normal,false
+goin,GOIN'!!!,all,normal,false
+message,メッセージ,all,normal,false
+evorevo,できたてEvo! Revo! Generation!,all,normal,false
+kagayaku,輝く世界の魔法,all,normal,false
+shine,Shine!!,all,normal,false
+otome,ススメ☆オトメ ～jewel parade～,all,limited,false
+yumeiro,夢色ハーモニー,all,event,true
+smiling,S(mile)ING!,cute,normal,false
+onedari,おねだり Shall We ～?,cute,normal,false
+kazeiro,風色メロディ,cute,normal,false
+happy2,Happy×2 Days,cute,normal,false
+anzuno,あんずのうた,cute,normal,false
+over,ØωØver!!,cute,normal,false
+chocolat,ショコラ・ティアラ,cute,normal,false
+otome-cute,ススメ☆オトメ ～jewel parade～ cute version,cute,limited,false
+ponkotsu,アタシポンコツアンドロイド,cute,limited,false
+neversay,Never say never,cool,normal,false
+twilight,Twilight Sky,cool,normal,false
+tsubomi,華蕾夢ミル狂詩曲～魂ノ導～,cool,normal,false
+memories,Memories,cool,normal,false
+legne,-LEGNE- 仇なす剣 光の旋律,cool,normal,false
+venus,ヴィーナスシンドローム,cool,normal,false
+otome-cool,ススメ☆オトメ ～jewel parade～ cool version,cool,limited,false
+trancing,Trancing Pulse,cool,limited,false
+nation,Nation Blue,cool,oldevent,false
+mitsuboshi,ミツボシ☆☆★,passion,normal,false
+dokidoki,DOKIDOKIリズム,passion,normal,false
+marshmallow,ましゅまろ☆キッス,passion,normal,false
+letsgo,LET’S GO HAPPY,passion,normal,false
+otome-passion,ススメ☆オトメ ～jewel parade～ passion version,passion,limited,false

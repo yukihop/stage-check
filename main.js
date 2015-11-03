@@ -1,4 +1,10 @@
-var levels = ['debut', 'regular', 'pro', 'master'];
+var levels = [
+	['debut', 'DEBUT', 'DE'],
+	['regular', 'REGULAR', 'RE'],
+	['pro', 'PRO', 'PR'],
+	['master', 'MASTER', 'MA'],
+	['masplus', 'MASTER+', 'M+']
+];
 var musics;
 
 $.get('musics.csv')
@@ -14,16 +20,21 @@ $.get('musics.csv')
 		var title  = music[1];
 		var type = music[2];
 		var category = music[3];
+		var master_plus = music[4];
 		if (!title) return;
 		var tr = $('<tr>').addClass(type).addClass(category).data('music-id', id).appendTo(table);
 		$('<th>').text(title).appendTo(tr);
 		var cell = $('<td>').addClass('checks').appendTo(tr);
-		levels.forEach(function(dif) {
-			var cid = 'm-' + id + '-' + dif;
-			var check = $('<input type="checkbox">').attr('id', cid).addClass(dif).appendTo(cell);
+		levels.forEach(function(lv) {
+			var lv_id = lv[0];
+			var lv_long = lv[1];
+			var lv_short = lv[2];
+			if (master_plus != 'true' && lv_id === 'masplus') return;
+			var cid = 'm-' + id + '-' + lv_id;
+			var check = $('<input type="checkbox">').attr('id', cid).addClass(lv_id).appendTo(cell);
 			var label = $('<label>').attr('for', cid).appendTo(cell);
-			$('<span>').addClass('level-full').text(dif.toUpperCase()).appendTo(label);
-			$('<span>').addClass('level-short').text(dif.substr(0, 2).toUpperCase()).appendTo(label);
+			$('<span>').addClass('level-full').text(lv_long).appendTo(label);
+			$('<span>').addClass('level-short').text(lv_short).appendTo(label);
 		});
 	});
 	applyFilter();
@@ -85,14 +96,18 @@ $('#import').on('click', function() {
 bootbox.setDefaults({ locale: 'ja', animate: false });
 
 function update() {
-	var total = 0;
-	var visibleMusics = $('tr:visible').length;
-	var counts = levels.map(function(dif) {
-		var count = $('tr:visible input:checked').filter('.' + dif).length;
-		total += count;
-		return dif.toUpperCase() + " " + count + '/' + visibleMusics;
+	var checked_total = 0;
+	var checkable_total = 0;
+	var counts = levels.map(function(lv) {
+		var lv_id = lv[0];
+		var lv_short = lv[2];
+		var checked = $('tr:visible input:checked').filter('.' + lv_id).length;
+		var checkable = $('tr:visible input').filter('.' + lv_id).length;
+		checked_total += checked;
+		checkable_total += checkable;
+		return lv_short + " " + checked + '/' + checkable;
 	});
-	$('#summary').text(counts.join('; ') + '; TOTAL ' + total + '/' + visibleMusics * levels.length);
+	$('#summary').text(counts.join('; ') + '; TOTAL ' + checked_total + '/' + checkable_total);
 	save();
 }
 
