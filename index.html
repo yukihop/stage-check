@@ -31,12 +31,12 @@ table label .level-short { display: none; }
 table label:hover { background-color: rgba(0, 0, 0, 0.2); }
 table input[type='checkbox'] { display: none; }
 
-table input:checked + label { color: white; text-shadow: 1px 1px black; }
-table input:checked.debut + label { background-color: #00e; }
-table input:checked.regular + label { background-color: #ba0; }
-table input:checked.pro + label { background-color: #a00; }
-table input:checked.master + label { background: linear-gradient(to right, #f66, #66f, #ff5); }
-table input:checked.masplus + label { background: linear-gradient(to bottom, #fa0, #fe0); }
+table input:checked + label { color: white; text-shadow: 1px 1px 1px black, -1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black; }
+table input:checked.debut + label { background: linear-gradient(to right, #089ac6, #8cefff); }
+table input:checked.regular + label { background: linear-gradient(to right, #ffb200, #ffffad); }
+table input:checked.pro + label { background: linear-gradient(to right, #ef245a, #ffc7de); }
+table input:checked.master + label { background: linear-gradient(to right bottom, #ff447a, #66aaff, #ff5); }
+table input:checked.masplus + label { background: linear-gradient(to right, #ff9a00, #fffbde 80%, #ffe75a); }
 
 textarea.inout { width: 100%; }
 
