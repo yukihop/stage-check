@@ -7,20 +7,35 @@ var levels = [
 ];
 var musics;
 
-$.get('musics.csv')
-.then(function(text) {
+// Extracts important data from Google Sheet API
+function analyzeSheet(data) {
+	return data.feed.entry.map(function(entry) {
+		var obj = {};
+		for (var key in entry) {
+			var m;
+			if (m = /gsx\$(.+)/.exec(key)) {
+				var val = entry[key].$t;
+				if (/^\d+$/.test(val)) val = parseInt(val);
+				obj[m[1]] = val;
+			}
+		}
+		obj.master_plus = obj.masterpluslv > 0;
+		return obj;
+	});
+}
+
+var source = 'https://spreadsheets.google.com/feeds/list/1jGNh06Bv94jxZKByO1aWI-uPXP7Ox7xXYtrhhgRDjoI/od6/public/values?alt=json';
+$.get(source, null, null, 'json')
+.then(function(data) {
 	var table = $('#list tbody');
-	musics =
-		text.split(/\n/).slice(1).map(function(line) {
-			return line.split(',').map(function(s) { return s.trim(); });
-		});
+	var musics = analyzeSheet(data);
 
 	musics.forEach(function(music) {
-		var id = music[0];
-		var title  = music[1];
-		var type = music[2];
-		var category = music[3];
-		var master_plus = music[4];
+		var id = music.id;
+		var title  = music.title;
+		var type = music.type;
+		var category = music.category;
+		var master_plus = music.master_plus;
 		if (!title) return;
 		var tr = $('<tr>').addClass(type).addClass(category).data('music-id', id).appendTo(table);
 		$('<th>').text(title).appendTo(tr);
