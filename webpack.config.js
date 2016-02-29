@@ -1,3 +1,5 @@
+var webpack = require("webpack");
+
 module.exports = {
 	entry: './src/index.jsx',
 	output: {
@@ -19,5 +21,8 @@ module.exports = {
 				loader: 'style!css!less'
 			}
 		]
-	}
+	},
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({minimize: true})
+	]
 };
