@@ -19,7 +19,7 @@ function analyzeSheet(data) {
 				obj[m[1]] = val;
 			}
 		}
-		obj.master_plus = obj.masterpluslv > 0;
+		obj.master_plus = obj.mpluslv > 0;
 		return obj;
 	});
 }
@@ -44,7 +44,7 @@ $.get(source, null, null, 'json')
 			var lv_id = lv[0];
 			var lv_long = lv[1];
 			var lv_short = lv[2];
-			if (master_plus != 'true' && lv_id === 'masplus') return;
+			if (master_plus != true && lv_id === 'masplus') return;
 			var cid = 'm-' + id + '-' + lv_id;
 			var check = $('<input type="checkbox">').attr('id', cid).addClass(lv_id).appendTo(cell);
 			var label = $('<label>').attr('for', cid).appendTo(cell);
