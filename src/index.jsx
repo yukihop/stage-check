@@ -1,3 +1,8 @@
+require('file?name=index.html!./index.html');
+require('file?name=bootbox.min.js!./bootbox.min.js');
+require('file?name=icon.png!./icon.png');
+
+
 var levels = [
 	['debut', 'DEBUT', 'DE'],
 	['regular', 'REGULAR', 'RE'],
