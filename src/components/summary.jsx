@@ -1,6 +1,6 @@
 import React from 'react';
 import { difficulty, difficultyOrder } from '../difficulty';
-import Panel from 'react-bootstrap/lib/Panel';
+import Well from 'react-bootstrap/lib/Well';
 
 export let Summary = props => {
 	let items = difficultyOrder.map(dif => {
@@ -12,7 +12,7 @@ export let Summary = props => {
 		return `${difStr} ${checked}/${checkable}`;
 	});
 
-	return <Panel className="summary">
+	return <Well className="summary" bsSize="sm">
 		{items.join('; ')}
-	</Panel>;
+	</Well>;
 };

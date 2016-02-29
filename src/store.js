@@ -20,7 +20,7 @@ class Reducers {
 	}
 
 	static tunesLoaded(state, action) {
-		const tunes = action.data.feed.entry.map(function(entry) {
+		const tunes = action.data.feed.entry.map(function(entry, i) {
 			var obj = {};
 			for (var key in entry) {
 				var m;
@@ -31,6 +31,7 @@ class Reducers {
 				}
 			}
 			obj.master_plus = obj.mpluslv > 0;
+			obj.order = i;
 			return obj;
 		});
 		state.tunes = tunes;
@@ -80,14 +81,44 @@ class Reducers {
 	}
 
 	static applyFilters(state, action) {
+		let sortFunc;
+		switch (state.sortOrder) {
+			case 'title':
+				sortFunc = (a, b) => a.title.localeCompare(b.title);
+				break;
+			case 'difficulty':
+				sortFunc = (a, b) => {
+					let alv = a.mpluslv > 0 ? a.mpluslv : a.masterlv;
+					let blv = b.mpluslv > 0 ? b.mpluslv : b.masterlv;
+					return blv - alv;
+				}
+				break;
+			case 'notes':
+				sortFunc = (a, b) => {
+					let anotes = a.mplusnotes > 0 ? a.mplusnotes : a.masternotes;
+					let bnotes = b.mplusnotes > 0 ? b.mplusnotes : b.masternotes;
+					return bnotes - anotes;
+				}
+				break;
+			case 'default':
+			default:
+				sortFunc = (a, b) => a.order - b.order;
+				break;
+		}
+
 		state.filteredTunes = state.tunes.filter(
 			tune => state.activeFilters[tune.category]
-		);
+		).sort(sortFunc);
 		return state;
 	}
 
 	static changeFilter(state, action) {
 		state.activeFilters[action.filter] = !!action.active;
+		return Reducers.applyFilters(state, {});
+	}
+
+	static sort(state, action) {
+		state.sortOrder = action.order;
 		return Reducers.applyFilters(state, {});
 	}
 }
@@ -110,6 +141,7 @@ function reducer(state, action) {
 	return {
 		tunes: [],
 		activeFilters: { normal: true, event: true, oldevent: true, limited: true },
+		sortOrder: 'default',
 		filteredTunes: [],
 		save
 	};

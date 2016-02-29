@@ -10,9 +10,9 @@ import Panel from 'react-bootstrap/lib/Panel';
 export let App = props => {
 	return <div className="container-fluid">
 		<h1><span className="glyphicon glyphicon-ok" /> Cinderella Checker</h1>
-		<div className="toolbar">
+		<div className="filter-bar">
 			<FilterSelector activeFilters={props.activeFilters}/>
-			<Sorter />
+			<Sorter sortOrder={props.sortOrder}/>
 		</div>
 		{props.tunes.length > 0 ?
 			<TuneTable tunes={props.filteredTunes} save={props.save} />
