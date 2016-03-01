@@ -4,7 +4,11 @@ function makeFilteredTunes(state) {
 	let sortFunc = (a, b) => a.order - b.order;
 	switch (state.sortOrder) {
 		case 'title':
-			sortFunc = (a, b) => a.title.localeCompare(b.title);
+			sortFunc = (a, b) => {
+				let atitle = a.title.replace(/\-/g, '');
+				let btitle = b.title.replace(/\-/g, '');
+				return atitle.localeCompare(btitle);
+			};
 			break;
 		case 'level':
 			sortFunc = (a, b) => {
