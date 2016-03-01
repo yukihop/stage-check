@@ -3,19 +3,21 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Button from 'react-bootstrap/lib/Button';
 import { default as Glyph } from 'react-bootstrap/lib/Glyphicon';
-import { store } from '../store';
+import { dispatch } from '../store';
 
 export let Toolbar = props => {
 	function exportData() {
-		store.dispatch({ type: 'exportData' });
+		dispatch({ type: 'exportData' });
 	}
 
 	function importData() {
-		store.dispatch({ type: 'showImportDialog' });
+		dispatch({ type: 'showImportDialog' });
 	}
 
 	function initialize() {
-		store.dispatch({ type: 'initialize' });
+		if (confirm('データを初期化しますか?　エクスポートなどで保存されていないデータは失われます。')) {
+			dispatch({ type: 'initialize' });
+		}
 	}
 
 	return <div className="toolbar">

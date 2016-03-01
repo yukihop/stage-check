@@ -53,9 +53,7 @@ class Reducers {
 	}
 
 	static initialize(state, action) {
-		if (confirm('データを初期化しますか?　エクスポートなどで保存されていないデータは失われます。')) {
-			state.save = {};
-		}
+		state.save = {};
 		return state;
 	}
 
@@ -123,7 +121,7 @@ function reducer(state, action) {
 	let save = {};
 	try {
 		let tmp = localStorage.getItem('clearData');
-		if (typeof tmp === 'string') {
+		if (tmp !== null) {
 			save = JSON.parse(tmp);
 		}
 	} catch (err) {
@@ -136,7 +134,7 @@ function reducer(state, action) {
 		showingAttribute: 'difficulty',
 		filteredTunes: [],
 		importDialogShowing: null,
-		save
+		save: save
 	};
 }
 
