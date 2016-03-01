@@ -7,8 +7,9 @@ import { store } from '../store';
 export let Sorter = props => {
 	const orderList = {
 		default: 'デフォルト',
-		difficulty: '曲毎の最高難易度順',
-		notes: 'ノート数多い順',
+		level: '最高難易度譜面の楽曲レベル順',
+		notes: '最高難易度譜面のノート数多い順',
+		// appearance: '登場日時順',
 		title: 'タイトル順'
 	};
 

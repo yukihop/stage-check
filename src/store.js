@@ -92,20 +92,24 @@ class Reducers {
 			case 'title':
 				sortFunc = (a, b) => a.title.localeCompare(b.title);
 				break;
-			case 'difficulty':
+			case 'level':
 				sortFunc = (a, b) => {
 					let alv = a.mpluslv > 0 ? a.mpluslv : a.masterlv;
 					let blv = b.mpluslv > 0 ? b.mpluslv : b.masterlv;
-					return blv - alv;
+					return (blv - alv) || (a.order - b.order);
 				}
 				break;
 			case 'notes':
 				sortFunc = (a, b) => {
 					let anotes = a.mplusnotes > 0 ? a.mplusnotes : a.masternotes;
 					let bnotes = b.mplusnotes > 0 ? b.mplusnotes : b.masternotes;
-					return bnotes - anotes;
+					return (bnotes - anotes) || (a.order - b.order);
 				}
 				break;
+			case 'appearance':
+				sortFunc = (a, b) => {
+					return a.appearance.compare(b.appearance) || (a.order - b.order);
+				}
 			case 'default':
 			default:
 				sortFunc = (a, b) => a.order - b.order;
