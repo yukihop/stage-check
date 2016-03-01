@@ -19,13 +19,15 @@ export let FilterSelector = props => {
 	return <span>
 		<Glyph glyph="filter" /> 表示&ensp;
 		<ButtonGroup bsSize='sm'>
-			{categories.map(cat => (
-				<Button key={cat.id} active={!!props.activeFilters[cat.id]}
+			{categories.map(cat => {
+				let count = props.tunes.filter(tune => tune.category === cat.id).length;
+				return <Button key={cat.id} active={!!props.activeFilters[cat.id]}
 				onClick={clicked.bind(null, cat.id)}>
 					{cat.caption}
 					{cat.glyph ? <Glyph glyph={cat.glyph} /> : null}
+					&ensp;({count})
 				</Button>
-			))}
+			})}
 		</ButtonGroup>
 	</span>
 }

@@ -11,7 +11,7 @@ export let App = props => {
 	return <div className="container-fluid">
 		<h1><span className="glyphicon glyphicon-ok" /> Cinderella Checker</h1>
 		<div className="filter-bar">
-			<FilterSelector activeFilters={props.activeFilters}/>
+			<FilterSelector activeFilters={props.activeFilters} tunes={props.tunes}/>
 			<Sorter sortOrder={props.sortOrder}/>
 		</div>
 		{props.tunes.length > 0 ?
