@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 
 import { App } from './components/app.jsx';
 import { store } from './store';
+import { loadTunes } from './actions';
 
 store.subscribe(() => {
 	let state = store.getState();
@@ -16,7 +17,7 @@ store.subscribe(() => {
 	);
 });
 
-store.dispatch({ type: 'loadTunes' });
+loadTunes();
 
 // Google analytics
 if (location.href.match(/github/)) {

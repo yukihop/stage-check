@@ -1,5 +1,4 @@
 import { createStore } from 'redux';
-import jQuery from 'jquery';
 
 class Reducers {
 	static changeCheckedState(state, action) {
@@ -19,35 +18,9 @@ class Reducers {
 		return state;
 	}
 
-	static tunesLoaded(state, action) {
-		const tunes = action.data.feed.entry.map(function(entry, i) {
-			var obj = {};
-			for (var key in entry) {
-				var m;
-				if (m = /gsx\$(.+)/.exec(key)) {
-					var val = entry[key].$t;
-					if (/^\d+$/.test(val)) val = parseInt(val);
-					obj[m[1]] = val;
-				}
-			}
-			obj.master_plus = obj.mpluslv > 0;
-			obj.order = i;
-			return obj;
-		});
-		state.tunes = tunes;
+	static registerTunes(state, action) {
+		state.tunes = action.tunes;
 		return Reducers.applyFilters(state, {});
-	}
-
-	static loadTunes(state, action) {
-		var source = 'https://spreadsheets.google.com/feeds/list/1jGNh06Bv94jxZKByO1aWI-uPXP7Ox7xXYtrhhgRDjoI/od6/public/values?alt=json';
-		jQuery.ajax({
-			url: source,
-			dataType: 'json',
-			success: data => {
-				store.dispatch({ type: 'tunesLoaded', data });
-			}
-		});
-		return state;
 	}
 
 	static exportData(state, action) {
