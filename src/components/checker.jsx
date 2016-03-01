@@ -18,13 +18,12 @@ export let Checker = props => {
 	let full = difficulty[props.difficulty][0];
 	let short = difficulty[props.difficulty][1];
 
-	let tmpDifficulty = props.difficulty === 'masplus' ? 'mplus' : props.difficulty;
 	if (props.attribute === 'notes') {
-		full = short = props.tune[tmpDifficulty + 'notes'];
+		full = short = props.tune[props.difficulty + 'notes'];
 		if (full == 0) full = short = '？';
 	}
 	if (props.attribute === 'level') {
-		full = short = props.tune[tmpDifficulty + 'lv'];
+		full = short = props.tune[props.difficulty + 'lv'];
 		if (full == 0) full = short = '？';
 	}
 

@@ -15,7 +15,7 @@ export let TuneTable = props => (
 	<table className="tune-table"><tbody>
 		{props.tunes.map(tune => {
 			let difficulties = ['debut', 'regular', 'pro', 'master'];
-			if (tune.master_plus) difficulties.push('masplus');
+			if (tune.maspluslv > 0) difficulties.push('masplus');
 			return <tr className={[tune.type, tune.category].join(' ')} key={tune.id}>
 				<th>{tune.title}</th>
 				<td className="checkers">
