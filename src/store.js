@@ -150,7 +150,9 @@ function reducer(state, action) {
 	let save = {};
 	try {
 		let tmp = localStorage.getItem('clearData');
-		save = JSON.parse(tmp);
+		if (typeof tmp === 'string') {
+			save = JSON.parse(tmp);
+		}
 	} catch (err) {
 		alert('セーブファイルが壊れています');
 	}
