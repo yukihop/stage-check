@@ -60,21 +60,27 @@ class Reducers {
 		return state;
 	}
 
-	static importData(state, action) {
-		let data = prompt('Save data?');
-		if (data !== null) {
+	static showImportDialog(state, action) {
+		state.importDialogShowing = true;
+		return state;
+	}
+
+	static commitImportData(state, action) {
+		if (typeof action.encoded === 'string' && action.encoded.length > 0) {
 			try {
-				let decoded = JSON.parse(atob(data));
+				let decoded = JSON.parse(atob(action.encoded));
 				state.save = decoded;
 			} catch (err) {
 				alert('無効なデータです。');
+				return state;
 			}
 		}
+		state.importDialogShowing = false;
 		return state;
 	}
 
 	static initialize(state, action) {
-		if (confirm('Init?')) {
+		if (confirm('データを初期化しますか?　エクスポートなどで保存されていないデータは失われます。')) {
 			state.save = {};
 		}
 		return state;
@@ -143,8 +149,10 @@ function reducer(state, action) {
 		activeFilters: { normal: true, event: true, oldevent: true, limited: true },
 		sortOrder: 'default',
 		filteredTunes: [],
+		importDialogShowing: null,
 		save
 	};
 }
 
 export let store = createStore(reducer);
+export let dispatch = store.dispatch;

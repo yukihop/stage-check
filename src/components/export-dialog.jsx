@@ -1,11 +1,11 @@
 import React from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import Input from 'react-bootstrap/lib/Input';
-import { store } from '../store';
+import { dispatch } from '../store';
 
 export let ExportDialog = props => {
 	function hide() {
-		store.dispatch({ type: 'hideExportDialog' });
+		dispatch({ type: 'hideExportDialog' });
 	}
 
 	function select(ev) {

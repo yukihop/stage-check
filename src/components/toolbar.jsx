@@ -11,7 +11,7 @@ export let Toolbar = props => {
 	}
 
 	function importData() {
-		store.dispatch({ type: 'importData' });
+		store.dispatch({ type: 'showImportDialog' });
 	}
 
 	function initialize() {

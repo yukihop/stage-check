@@ -5,6 +5,7 @@ import { TuneTable } from './tunetable.jsx';
 import { Summary } from './summary.jsx';
 import { Toolbar } from './toolbar.jsx';
 import { ExportDialog } from './export-dialog.jsx';
+import { ImportDialog } from './import-dialog.jsx';
 import Panel from 'react-bootstrap/lib/Panel';
 
 export let App = props => {
@@ -32,5 +33,6 @@ export let App = props => {
 		</Panel>
 		<ExportDialog encoded={props.exportDialogContent}
 			show={typeof props.exportDialogContent === 'string'}/>
+		<ImportDialog show={props.importDialogShowing}/>
 	</div>
 };
