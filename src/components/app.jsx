@@ -1,6 +1,7 @@
 import React from 'react';
 import { FilterSelector } from './filter-selector.jsx';
 import { Sorter } from './sorter.jsx';
+import { AttributeSwitcher } from './attribute-switcher.jsx';
 import { TuneTable } from './tunetable.jsx';
 import { Summary } from './summary.jsx';
 import { Toolbar } from './toolbar.jsx';
@@ -13,10 +14,13 @@ export let App = props => {
 		<h1><span className="glyphicon glyphicon-ok" /> Cinderella Checker</h1>
 		<div className="filter-bar">
 			<FilterSelector activeFilters={props.activeFilters} tunes={props.tunes}/>
+			&ensp;
 			<Sorter sortOrder={props.sortOrder}/>
+			&ensp;
+			<AttributeSwitcher attribute={props.showingAttribute}/>
 		</div>
 		{props.tunes.length > 0 ?
-			<TuneTable tunes={props.filteredTunes} save={props.save} />
+			<TuneTable tunes={props.filteredTunes} save={props.save} attribute={props.showingAttribute}/>
 		:
 			<Panel>楽曲一覧を読み込み中...</Panel>
 		}

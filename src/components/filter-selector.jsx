@@ -17,7 +17,7 @@ export let FilterSelector = props => {
 	}
 
 	return <span>
-		<Glyph glyph="filter" /> 表示&ensp;
+		<Glyph glyph="filter" />&ensp;
 		<ButtonGroup bsSize='sm'>
 			{categories.map(cat => {
 				let count = props.tunes.filter(tune => tune.category === cat.id).length;

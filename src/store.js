@@ -132,6 +132,11 @@ class Reducers {
 		state.sortOrder = action.order;
 		return Reducers.applyFilters(state, {});
 	}
+
+	static showAttribute(state, action) {
+		state.showingAttribute = action.attribute;
+		return state;
+	}
 }
 
 function reducer(state, action) {
@@ -153,6 +158,7 @@ function reducer(state, action) {
 		tunes: [],
 		activeFilters: { normal: true, event: true, oldevent: true, limited: true },
 		sortOrder: 'default',
+		showingAttribute: 'difficulty',
 		filteredTunes: [],
 		importDialogShowing: null,
 		save

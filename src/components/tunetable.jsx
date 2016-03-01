@@ -5,7 +5,8 @@ import { Checker } from './checker.jsx';
 let CheckerArray = props => (
 	<span>
 		{props.difficulties.map(dif => (
-			<Checker key={dif} tune={props.tune} difficulty={dif} checked={props.checkedData[dif]} />
+			<Checker key={dif} attribute={props.attribute}
+			tune={props.tune} difficulty={dif} checked={props.checkedData[dif]} />
 		))}
 	</span>
 );
@@ -19,7 +20,8 @@ export let TuneTable = props => (
 				<th>{tune.title}</th>
 				<td className="checkers">
 					<CheckerArray
-						tune={tune.id}
+						tune={tune}
+						attribute={props.attribute}
 						checkedData={props.save[tune.id] ? props.save[tune.id] : {}}
 						difficulties={difficulties} />
 				</td>

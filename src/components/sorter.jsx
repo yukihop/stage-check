@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/lib/Button';
 import DropdownButton from 'react-bootstrap/lib/DropdownButton';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 import { store } from '../store';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 export let Sorter = props => {
 	const orderList = {
@@ -18,7 +19,7 @@ export let Sorter = props => {
 	}
 
 	return <span>
-		&ensp;ソート
+		<Glyphicon glyph="sort" />&ensp;
 		<DropdownButton title={orderList[props.sortOrder]} bsSize="sm" id="sorter">
 			{Object.keys(orderList).map(key => {
 				let caption = orderList[key];
