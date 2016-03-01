@@ -1,112 +1,122 @@
 import { createStore } from 'redux';
 
+function makeFilteredTunes(state) {
+	let sortFunc = (a, b) => a.order - b.order;
+	switch (state.sortOrder) {
+		case 'title':
+			sortFunc = (a, b) => a.title.localeCompare(b.title);
+			break;
+		case 'level':
+			sortFunc = (a, b) => {
+				let alv = a.mpluslv > 0 ? a.mpluslv : a.masterlv;
+				let blv = b.mpluslv > 0 ? b.mpluslv : b.masterlv;
+				return (blv - alv) || (a.order - b.order);
+			};
+			break;
+		case 'notes':
+			sortFunc = (a, b) => {
+				let anotes = a.mplusnotes > 0 ? a.mplusnotes : a.masternotes;
+				let bnotes = b.mplusnotes > 0 ? b.mplusnotes : b.masternotes;
+				return (bnotes - anotes) || (a.order - b.order);
+			};
+			break;
+		case 'unlock':
+			sortFunc = (a, b) => {
+				return b.unlock.localeCompare(a.unlock) || (a.order - b.order);
+			};
+			break;
+	}
+
+	state.filteredTunes = state.tunes
+		.filter(tune => state.activeFilters[tune.category])
+		.sort(sortFunc);
+}
+
+function saveState(state) {
+	localStorage.setItem('clearData', JSON.stringify(state.save));
+}
+
 class Reducers {
 	static changeCheckedState(state, action) {
-		if (!(action.tune in state.save)) {
-			state.save[action.tune] = {};
+		let newSave = { ...state.save };
+		if (!(action.tune in newSave)) {
+			newSave[action.tune] = {};
 		}
-		let checks = state.save[action.tune];
+		let checks = { ... newSave[action.tune] };
 		if (action.checked) {
 			checks[action.difficulty] = true;
 		} else {
 			delete checks[action.difficulty];
 		}
+		newSave[action.tune] = checks;
 		if (Object.keys(checks).length === 0) {
-			delete state.save[action.tune];
+			delete newSave[action.tune];
 		}
-		localStorage.setItem('clearData', JSON.stringify(state.save));
-		return state;
+		let newState = { ...state, ...{ save: newSave } };
+		saveState(newState);
+		return newState;
 	}
 
 	static registerTunes(state, action) {
-		state.tunes = action.tunes;
-		return Reducers.applyFilters(state, {});
+		let newState = { ...state, ...{ tunes: action.tunes } };
+		makeFilteredTunes(newState);
+		return newState;
 	}
 
 	static exportData(state, action) {
-		state.exportDialogContent = btoa(JSON.stringify(state.save));
-		return state;
+		return {
+			...state,
+			...{ exportDialogContent: btoa(JSON.stringify(state.save)) }
+		};
 	}
 
 	static hideExportDialog(state, action) {
-		delete state.exportDialogContent;
-		return state;
+		let newState = { ...state };
+		delete newState.exportDialogContent;
+		return newState;
 	}
 
 	static showImportDialog(state, action) {
-		state.importDialogShowing = true;
-		return state;
+		return { ...state, ...{ importDialogShowing: true } };
 	}
 
 	static commitImportData(state, action) {
 		if (typeof action.encoded === 'string' && action.encoded.length > 0) {
 			try {
-				let decoded = JSON.parse(atob(action.encoded));
-				state.save = decoded;
+				let newSave = JSON.parse(atob(action.encoded));
+				let newState = { ...state, ...{ importDialogShowing: false, save: newSave }};
+				saveState(newState);
+				return newState;
 			} catch (err) {
 				alert('無効なデータです。');
 				return state;
 			}
 		}
-		state.importDialogShowing = false;
-		return state;
+		return { ...state, ...{ importDialogShowing: false } };
 	}
 
 	static initialize(state, action) {
-		state.save = {};
-		return state;
-	}
-
-	static applyFilters(state, action) {
-		let sortFunc;
-		switch (state.sortOrder) {
-			case 'title':
-				sortFunc = (a, b) => a.title.localeCompare(b.title);
-				break;
-			case 'level':
-				sortFunc = (a, b) => {
-					let alv = a.mpluslv > 0 ? a.mpluslv : a.masterlv;
-					let blv = b.mpluslv > 0 ? b.mpluslv : b.masterlv;
-					return (blv - alv) || (a.order - b.order);
-				};
-				break;
-			case 'notes':
-				sortFunc = (a, b) => {
-					let anotes = a.mplusnotes > 0 ? a.mplusnotes : a.masternotes;
-					let bnotes = b.mplusnotes > 0 ? b.mplusnotes : b.masternotes;
-					return (bnotes - anotes) || (a.order - b.order);
-				};
-				break;
-			case 'unlock':
-				sortFunc = (a, b) => {
-					return b.unlock.localeCompare(a.unlock) || (a.order - b.order);
-				};
-				break;
-			case 'default':
-			default:
-				sortFunc = (a, b) => a.order - b.order;
-				break;
-		}
-
-		state.filteredTunes = state.tunes.filter(
-			tune => state.activeFilters[tune.category]
-		).sort(sortFunc);
-		return state;
+		let newState = { ...state, ...{ save: {} } };
+		saveState(newState);
+		return newState;
 	}
 
 	static changeFilter(state, action) {
-		state.activeFilters[action.filter] = !!action.active;
-		return Reducers.applyFilters(state, {});
+		let newFilters = { ...state.activeFilters };
+		newFilters[action.filter] = !!action.active;
+		let newState = { ...state, ...{ activeFilters: newFilters } };
+		makeFilteredTunes(newState);
+		return newState;
 	}
 
 	static sort(state, action) {
-		state.sortOrder = action.order;
-		return Reducers.applyFilters(state, {});
+		let newState = { ...state, ...{ sortOrder: action.order } };
+		makeFilteredTunes(newState);
+		return newState;
 	}
 
 	static showAttribute(state, action) {
-		state.showingAttribute = action.attribute;
-		return state;
+		return { ...state, ...{ showingAttribute: action.attribute }};
 	}
 }
 
