@@ -12,7 +12,7 @@ let CheckerArray = props => (
 );
 
 export let TuneTable = props => (
-	<table><tbody>
+	<table className="tune-table"><tbody>
 		{props.tunes.map(tune => {
 			let difficulties = ['debut', 'regular', 'pro', 'master'];
 			if (tune.master_plus) difficulties.push('masplus');

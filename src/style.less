@@ -1,19 +1,25 @@
-table { border-collapse: collapse; }
-td, th { border: 1px solid white; font-weight: normal; padding: 1px; }
-td.checks { width: 463px; }
-tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
-tr.cute { background-color: #ffdddd; }
-tr.cool { background-color: #ddddff; }
-tr.passion { background-color: #ffffdd; }
+.tune-table {
+	border-collapse: collapse;
+	td, th { border: 1px solid white; font-weight: normal; padding: 1px; }
+	td.checks { width: 463px; }
 
-th::after {
-	font-family: 'Glyphicons Halflings'; margin-left: 3px; color: gray; }
-tr.event th::after { content: '\e023'; }
-tr.oldevent th { color: silver; }
-tr.oldevent th::after { content: '\e090'; }
-tr.limited th::after { content: '\e063'; }
+	// tune types
+	tr.all { background: linear-gradient(to bottom, #fee, #eef, #ffe); }
+	tr.cute { background-color: #ffdddd; }
+	tr.cool { background-color: #ddddff; }
+	tr.passion { background-color: #ffffdd; }
+
+	// tune categories
+	th::after {
+		font-family: 'Glyphicons Halflings'; margin-left: 3px; color: gray; }
+	tr.event th::after { content: '\e023'; }
+	tr.oldevent th { color: silver; }
+	tr.oldevent th::after { content: '\e090'; }
+	tr.limited th::after { content: '\e063'; }
+}
 
 .summary { font-weight: bold; }
+
 .toolbar { margin: 0.3em; }
 
 .checker {
@@ -23,12 +29,16 @@ tr.limited th::after { content: '\e063'; }
 	box-shadow: 1px 1px gray;
 	font-weight: bold;
 	background: rgba(0, 0, 0, 0.5);
-	color: #555;
+	color: #111;
 	border-radius: 3px;
 	margin-right: 2px;
 	cursor: pointer;
-	-moz-user-select: none; -ms-user-select: none; -webkit-user-select: none;
-	&:hover { background-color: rgba(0, 0, 0, 0.2); }
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	&:hover { background-color: rgba(0, 0, 0, 0.5); }
+
 	&.checked {
 		color: white;
 		text-shadow: 1px 1px 1px black, -1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black;
