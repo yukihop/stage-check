@@ -97,19 +97,20 @@ class Reducers {
 					let alv = a.mpluslv > 0 ? a.mpluslv : a.masterlv;
 					let blv = b.mpluslv > 0 ? b.mpluslv : b.masterlv;
 					return (blv - alv) || (a.order - b.order);
-				}
+				};
 				break;
 			case 'notes':
 				sortFunc = (a, b) => {
 					let anotes = a.mplusnotes > 0 ? a.mplusnotes : a.masternotes;
 					let bnotes = b.mplusnotes > 0 ? b.mplusnotes : b.masternotes;
 					return (bnotes - anotes) || (a.order - b.order);
-				}
+				};
 				break;
-			case 'appearance':
+			case 'unlock':
 				sortFunc = (a, b) => {
-					return a.appearance.compare(b.appearance) || (a.order - b.order);
-				}
+					return b.unlock.localeCompare(a.unlock) || (a.order - b.order);
+				};
+				break;
 			case 'default':
 			default:
 				sortFunc = (a, b) => a.order - b.order;

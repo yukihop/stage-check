@@ -9,7 +9,7 @@ export let Sorter = props => {
 		default: 'デフォルト',
 		level: '最高難易度譜面の楽曲レベル順',
 		notes: '最高難易度譜面のノート数多い順',
-		// appearance: '登場日時順',
+		unlock: '登場日時順',
 		title: 'タイトル順'
 	};
 
@@ -19,10 +19,10 @@ export let Sorter = props => {
 
 	return <span>
 		&ensp;ソート
-		<DropdownButton title={orderList[props.sortOrder]} bsSize="sm">
+		<DropdownButton title={orderList[props.sortOrder]} bsSize="sm" id="sorter">
 			{Object.keys(orderList).map(key => {
 				let caption = orderList[key];
-				return <MenuItem onClick={() => sort(key)}>{caption}</MenuItem>
+				return <MenuItem key={key} onClick={() => sort(key)}>{caption}</MenuItem>
 			})}
 		</DropdownButton>
 	</span>;
