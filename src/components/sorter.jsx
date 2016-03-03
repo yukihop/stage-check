@@ -1,7 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import { ShrinkSelect } from './shrink-select.jsx';
 import { store } from '../store';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
@@ -20,11 +18,7 @@ export let Sorter = props => {
 
 	return <span>
 		<Glyphicon glyph="sort" />&ensp;
-		<DropdownButton title={orderList[props.sortOrder]} bsSize="sm" id="sorter">
-			{Object.keys(orderList).map(key => {
-				let caption = orderList[key];
-				return <MenuItem key={key} onClick={() => sort(key)}>{caption}</MenuItem>
-			})}
-		</DropdownButton>
+		<ShrinkSelect options={orderList} id="sorter"
+			value={props.sortOrder} onChange={sort} />
 	</span>;
 }
