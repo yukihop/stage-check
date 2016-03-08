@@ -18,6 +18,10 @@ Building
 % npm run build
 ```
 
+To get the production (minified) build, set `NODE_ENV=production` (see `deploy.sh`).
+
+[![Build Status](https://travis-ci.org/yukihop/stage-check.svg?branch=master)](https://travis-ci.org/yukihop/stage-check)
+
 License
 -------
 
