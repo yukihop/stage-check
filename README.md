@@ -13,8 +13,6 @@ https://docs.google.com/spreadsheets/d/1jGNh06Bv94jxZKByO1aWI-uPXP7Ox7xXYtrhhgRD
 Building
 --------
 
-Install `webpack` globally, or:
-
 ```
 % npm install
 % npm run build
