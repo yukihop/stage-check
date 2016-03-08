@@ -11,7 +11,7 @@ rm -rf built || exit 0;
 mkdir built;
 
 # Run our compile script
-NODE_ENV=production webpack
+NODE_ENV=production npm run build
 
 # Go to the built directory and create a *new* Git repo
 cd built

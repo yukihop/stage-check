@@ -9,7 +9,16 @@ https://docs.google.com/spreadsheets/d/1jGNh06Bv94jxZKByO1aWI-uPXP7Ox7xXYtrhhgRD
 
 - 上記スプレッドシートへの編集者として立候補する
 - Twitterなどでつつく
-- あきらめる
+
+Building
+--------
+
+Install `webpack` globally, or:
+
+```
+% npm install
+% npm run build
+```
 
 License
 -------
