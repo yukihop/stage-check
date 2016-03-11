@@ -12,15 +12,15 @@ function makeFilteredTunes(state) {
 			break;
 		case 'level':
 			sortFunc = (a, b) => {
-				let alv = a.mpluslv > 0 ? a.mpluslv : a.masterlv;
-				let blv = b.mpluslv > 0 ? b.mpluslv : b.masterlv;
+				let alv = a.maspluslv > 0 ? a.maspluslv : a.masterlv;
+				let blv = b.maspluslv > 0 ? b.maspluslv : b.masterlv;
 				return (blv - alv) || (a.order - b.order);
 			};
 			break;
 		case 'notes':
 			sortFunc = (a, b) => {
-				let anotes = a.mplusnotes > 0 ? a.mplusnotes : a.masternotes;
-				let bnotes = b.mplusnotes > 0 ? b.mplusnotes : b.masternotes;
+				let anotes = a.masplusnotes > 0 ? a.masplusnotes : a.masternotes;
+				let bnotes = b.masplusnotes > 0 ? b.masplusnotes : b.masternotes;
 				return (bnotes - anotes) || (a.order - b.order);
 			};
 			break;
